@@ -1,14 +1,14 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 
-import HomepPage from './homepage.component';
+import Homepage from './pages/homepage/homepage.component';
 
-function App() {
+const App: React.FunctionComponent = (): JSX.Element => {
   return (
     <div>
-      <HomepPage />
+      <Homepage />
     </div>
   );
-}
+};
 
 export default App;
