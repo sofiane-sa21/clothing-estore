@@ -4,7 +4,7 @@ import Directory from '../../components/directory/directory.component';
 
 import './homepage.styles.scss';
 
-const Homepage: React.FunctionComponent = (): JSX.Element => {
+const Homepage: React.FC = (): JSX.Element => {
   return (
     <div className="homepage">
       <Directory />
