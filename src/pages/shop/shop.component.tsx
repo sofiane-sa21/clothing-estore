@@ -1,7 +1,8 @@
 import React from 'react';
 
 import CollectionPreview from '../../components/collection-preview/collection-preview.component';
-import { SHOP_DATA, Collection } from './shop.data';
+import { Collection } from '../../models/shop';
+import { SHOP_DATA } from './shop.data';
 
 class ShopPage extends React.Component {
   state: {
