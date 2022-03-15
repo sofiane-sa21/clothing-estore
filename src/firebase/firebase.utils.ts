@@ -5,7 +5,17 @@ import {
   signInWithPopup,
   User,
 } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  CollectionReference,
+  collection,
+  DocumentData,
+  doc,
+  getDoc,
+  setDoc,
+} from 'firebase/firestore';
+
+import { CustomUser } from '../models/custom-user';
 
 const config = {
   apiKey: 'AIzaSyA1NUWAaNwMCAOt8HM4dryyMJoRpOM476s',
@@ -21,9 +31,15 @@ const firebase = initializeApp(config);
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 
-export const db = getFirestore();
+export const firestore = getFirestore();
 export const auth = getAuth();
 export const signInWithGoogle = () => signInWithPopup(auth, provider);
+
+const createCollection = <T = DocumentData>(collectionName: string) => {
+  return collection(firestore, collectionName) as CollectionReference<T>;
+};
+
+export const usersCol = createCollection<CustomUser>('users');
 
 export const createUserProfileDocument = async (
   userAuth: User | null,
@@ -33,12 +49,12 @@ export const createUserProfileDocument = async (
     return null;
   }
 
-  const userRef = doc(db, 'users', userAuth.uid);
+  const userRef = doc(usersCol, userAuth.uid);
   const docSnap = await getDoc(userRef);
 
   if (!docSnap.exists()) {
     const { displayName, email } = userAuth;
-    const createdAt = new Date();
+    const createdAt = Date.now();
     try {
       await setDoc(userRef, {
         displayName,
