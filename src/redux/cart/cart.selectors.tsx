@@ -12,7 +12,21 @@ export const selectCartItems = createSelector(
 export const selectCartItemsCount = createSelector(
   [selectCartItems],
   (cartItems) => {
-    console.log('thrown');
     return cartItems.reduce((count, cartItem) => count + cartItem.quantity, 0);
+  }
+);
+
+export const selectCartHidden = createSelector(
+  [selectCart],
+  (cart) => cart.hidden
+);
+
+export const selectCartTotalPrice = createSelector(
+  [selectCartItems],
+  (cartItems) => {
+    return cartItems.reduce(
+      (totalPrice, cartItem) => totalPrice + cartItem.quantity * cartItem.price,
+      0
+    );
   }
 );

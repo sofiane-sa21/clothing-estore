@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../store';
 
 import { CustomUser } from '../../models/custom-user';
 
@@ -22,7 +21,5 @@ const userSlice = createSlice({
 });
 
 export const { setCurrentUser } = userSlice.actions;
-
-export const selectCurrentUser = (state: RootState) => state.user.currentUser;
 
 export default userSlice.reducer;
