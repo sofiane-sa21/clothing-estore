@@ -44,6 +44,4 @@ const cartSlice = createSlice({
 
 export const { toggleHidden, addItem } = cartSlice.actions;
 
-export const selectAllCartItems = (state: RootState) => state.cart.cartItems;
-
 export default cartSlice.reducer;

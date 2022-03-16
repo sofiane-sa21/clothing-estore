@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CartItem } from '../../redux/slices/cart.slice';
+import { CartItem } from '../../redux/cart/cart.slice';
 
 import './cart-item.styles.scss';
 

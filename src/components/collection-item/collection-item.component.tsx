@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Item } from '../../models/shop';
 import { useAppDispatch } from '../../redux/hooks';
-import { addItem } from '../../redux/slices/cart.slice';
+import { addItem } from '../../redux/cart/cart.slice';
 
 import CustomButton from '../custom-button/custom-button.component';
 
