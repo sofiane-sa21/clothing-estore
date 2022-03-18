@@ -1,7 +1,7 @@
-import { Collection } from '../../models/shop';
+// import { Collection } from '../../models/shop';
 
-export const SHOP_DATA: Collection[] = [
-  {
+export const SHOP_DATA = {
+  hats: {
     id: 1,
     title: 'Hats',
     routeName: 'hats',
@@ -62,7 +62,7 @@ export const SHOP_DATA: Collection[] = [
       },
     ],
   },
-  {
+  sneakers: {
     id: 2,
     title: 'Sneakers',
     routeName: 'sneakers',
@@ -117,7 +117,7 @@ export const SHOP_DATA: Collection[] = [
       },
     ],
   },
-  {
+  jackets: {
     id: 3,
     title: 'Jackets',
     routeName: 'jackets',
@@ -154,7 +154,7 @@ export const SHOP_DATA: Collection[] = [
       },
     ],
   },
-  {
+  womens: {
     id: 4,
     title: 'Womens',
     routeName: 'womens',
@@ -203,7 +203,7 @@ export const SHOP_DATA: Collection[] = [
       },
     ],
   },
-  {
+  mens: {
     id: 5,
     title: 'Mens',
     routeName: 'mens',
@@ -246,6 +246,6 @@ export const SHOP_DATA: Collection[] = [
       },
     ],
   },
-];
+};
 
 export default SHOP_DATA;
