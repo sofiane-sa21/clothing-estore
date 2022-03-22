@@ -35,6 +35,8 @@ class App extends React.Component<PropsFromRedux> {
   }
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -43,7 +45,7 @@ class App extends React.Component<PropsFromRedux> {
           onSnapshot(userRef, (snapShot) => {
             const user = snapShot.data();
             if (user) {
-              this.props.setCurrentUser({
+              setCurrentUser({
                 ...user,
                 uid: userRef.id,
               });
@@ -51,7 +53,7 @@ class App extends React.Component<PropsFromRedux> {
           });
         }
       } else {
-        this.props.setCurrentUser(userAuth);
+        setCurrentUser(userAuth);
       }
     });
   }

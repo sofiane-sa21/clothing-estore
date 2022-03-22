@@ -1,15 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Collection } from '../../models/shop';
 
-import SHOP_DATA from './shop.data';
+interface DirectoryState {
+  collections: {
+    [key: string]: Collection;
+  } | null;
+}
 
-const initialState = {
-  collections: SHOP_DATA,
+const initialState: DirectoryState = {
+  collections: {},
 };
 
 const directorySlice = createSlice({
   name: 'shop',
   initialState,
-  reducers: {},
+  reducers: {
+    updateCollections: (
+      state,
+      action: PayloadAction<{ [key: string]: Collection }>
+    ) => {
+      state.collections = action.payload;
+    },
+  },
 });
+
+export const { updateCollections } = directorySlice.actions;
 
 export default directorySlice.reducer;

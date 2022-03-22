@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../redux/hooks';
 import { selectShopCollection } from '../../redux/shop/shop.selectors';
@@ -10,12 +10,17 @@ import './collection.styles.scss';
 
 const CollectionPage: React.FC = (): JSX.Element => {
   const { categoryId } = useParams<{
-    categoryId: 'hats' | 'sneakers' | 'jackets' | 'womens' | 'mens';
+    categoryId: string;
   }>();
   const collection = useAppSelector(selectShopCollection(categoryId));
   const navigate = useNavigate();
 
-  if (!categoryId || !collection) {
+  if (!categoryId) {
+    navigate('/shop');
+    return <></>;
+  }
+
+  if (!collection) {
     navigate('/shop');
     return <></>;
   } else {

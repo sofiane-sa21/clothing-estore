@@ -6,7 +6,7 @@ export type Item = {
 };
 
 export type Collection = {
-  id: number;
+  id: string;
   title: string;
   routeName: string;
   items: Item[];

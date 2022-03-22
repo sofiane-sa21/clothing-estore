@@ -13,9 +13,11 @@ import {
   doc,
   getDoc,
   setDoc,
+  QuerySnapshot,
 } from 'firebase/firestore';
 
 import { CustomUser } from '../models/custom-user';
+import { Collection, Item } from '../models/shop';
 
 const config = {
   apiKey: 'AIzaSyA1NUWAaNwMCAOt8HM4dryyMJoRpOM476s',
@@ -40,6 +42,8 @@ const createCollection = <T = DocumentData>(collectionName: string) => {
 };
 
 export const usersCol = createCollection<CustomUser>('users');
+export const collectionsCol =
+  createCollection<{ title: string; items: Item[] }>('collections');
 
 export const createUserProfileDocument = async (
   userAuth: User | null,
@@ -68,6 +72,29 @@ export const createUserProfileDocument = async (
   }
 
   return userRef;
+};
+
+export const convertCollectionsSnapshotToMap = (
+  collections: QuerySnapshot<{ title: string; items: Item[] }>
+) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
+
+    return {
+      id: doc.id,
+      routeName: encodeURI(title.toLowerCase()),
+      title,
+      items,
+    } as Collection;
+  });
+
+  return transformedCollection.reduce(
+    (accumulator: { [key: string]: Collection }, collection) => {
+      accumulator[collection.title.toLowerCase()] = collection;
+      return accumulator;
+    },
+    {}
+  );
 };
 
 export default firebase;
